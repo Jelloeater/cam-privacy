@@ -1,13 +1,9 @@
 import logging
 import os
-import time
 
 import uvicorn
 from fastapi import FastAPI
 from starlette.responses import RedirectResponse
-
-import cam_privacy
-import cam_privacy.cam_privacy as porch_light
 
 if os.getenv("LOG_LEVEL") is None:
     logging.basicConfig(level=logging.WARNING)
