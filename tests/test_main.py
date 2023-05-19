@@ -12,7 +12,23 @@ load_dotenv()
 os.environ.setdefault("TEST_MODE", str(True))  # To break out of color cycle loop
 
 
+class Test_Mock:
+    """This run a mock of the server, better for debugging"""
+
+    from fastapi.testclient import TestClient
+
+    c = TestClient(web.web_app().app)
+
+    def test_on(self):
+        self.c.get("/on")
+
+    def test_off(self):
+        self.c.get("/off")
+
+
 class Test_API_full:
+    """This run a full version of the webserver"""
+
     background_server = Process(target=web.Server.start_server, daemon=True)
 
     @classmethod
@@ -25,10 +41,21 @@ class Test_API_full:
         cls.background_server.terminate()
 
     def test_base_url(self):
-        r = requests.get(url="http://" + web.Server.local_nic() + ":" + str(web.Server.port))
+        r = requests.get(url=f"http://{web.Server.local_nic()}:{str(web.Server.port)}")
+        assert r.status_code == 200
+
+    def test_on(self):
+        r = requests.get(url=f"http://{web.Server.local_nic()}:{str(web.Server.port)}/on")
+        assert r.status_code == 200
+
+    def test_off(self):
+        r = requests.get(url=f"http://{web.Server.local_nic()}:{str(web.Server.port)}/off")
         assert r.status_code == 200
 
 
 class TestMain:
     def test_privacy_on(self):
         cam_privacy.main.privacy_toggle(True)
+
+    def test_privacy_off(self):
+        cam_privacy.main.privacy_toggle(False)

@@ -3,6 +3,7 @@ import os
 
 import amcrest
 
+
 # Should just use .env file for inputs
 
 
@@ -18,6 +19,11 @@ def get_cameras() -> list[amcrest.ApiWrapper]:
 
 
 def privacy_toggle(privacy_mode: bool):
+    r = []
     for i in get_cameras():
-        i.set_privacy(privacy_mode)
-    return
+        x = i.set_privacy(privacy_mode)
+        if "OK" in x:
+            # TODO Finish passing meaningful status code
+            r.append(True)
+        r.append(x)
+    return r

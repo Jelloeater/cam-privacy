@@ -1,6 +1,10 @@
 import logging
 import os
 
+import fastapi
+
+import cam_privacy.main
+
 import uvicorn
 from fastapi import FastAPI
 from starlette.responses import RedirectResponse
@@ -19,11 +23,19 @@ class web_app:
         async def root():
             return RedirectResponse(self.app.docs_url)
 
+        @self.app.get("/on")
+        async def privacy_on():
+            s = cam_privacy.main.privacy_toggle(True)
+            r = fastapi.Response()
+            r.body(s)
+            return r
 
-        @self.app.get("/start")
-        async def start():  # pragma: no cover # TODO Remove when test fixed
-
-            return {"EXITCODE=" + str(200)}
+        @self.app.get("/off")
+        async def privacy_off():
+            s = cam_privacy.main.privacy_toggle(False)
+            r = fastapi.Response()
+            r.body(s)
+            return r
 
 
 class Server:
