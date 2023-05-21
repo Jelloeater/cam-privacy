@@ -13,4 +13,4 @@ def get_camera_single(hostname: str) -> amcrest.ApiWrapper:
 
 def privacy_toggle_single(hostname: str, privacy_mode: bool):
     c = get_camera_single(hostname)
-    c.set_privacy(privacy_mode)
+    return c.set_privacy(privacy_mode)

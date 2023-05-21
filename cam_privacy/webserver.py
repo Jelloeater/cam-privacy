@@ -25,16 +25,14 @@ class web_app:
 
         @self.app.get("/{hostname}/on")
         async def privacy_on(hostname: str):
-            s = cam_privacy.main.get_camera_single(hostname)
-            s.set_privacy(True)
+            s = cam_privacy.main.privacy_toggle_single(hostname, True)
             r = fastapi.Response()
             r.body(s)
             return r
 
         @self.app.get("/{hostname}/off")
         async def privacy_off(hostname: str):
-            s = cam_privacy.main.get_camera_single(hostname)
-            s.set_privacy(False)
+            s = cam_privacy.main.privacy_toggle_single(hostname, False)
             r = fastapi.Response()
             r.body(s)
             return r
