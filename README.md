@@ -1,10 +1,12 @@
-# porch_light
+# cam-privacy
 
-[![CodeQL](https://github.com/Jelloeater/cam_privacy/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Jelloeater/cam_privacy/actions/workflows/codeql.yml)
-[![GitHub](https://img.shields.io/github/license/jelloeater/cam_privacy)](https://github.com/Jelloeater/cam_privacy/blob/main/LICENSE)
+[![CodeQL](https://github.com/Jelloeater/cam-privacy/actions/workflows/codeql.yml/badge.svg)](https://github.com/Jelloeater/cam-privacy/actions/workflows/codeql.yml)
+[![GitHub](https://img.shields.io/github/license/jelloeater/cam-privacy)](https://github.com/Jelloeater/cam-privacy/blob/main/LICENSE)
 
 ## Intro
-
+- Simple glue app to toggle Amcrest Camera Privacy on and off via a GET request
+- Uses FastAPI for the webserver endpoint and https://github.com/tchellomello/python-amcrest for Camera control.
+- Shoutout to @tchellomello
 
 # How to use
 ## STEP 1:
