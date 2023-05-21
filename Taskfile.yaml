@@ -17,6 +17,7 @@ tasks:
             - task: commit
             - task: pytest
     commit:
+        deps: # Run all at once
         - task: format
         - task: security
         - task: docs
@@ -39,7 +40,6 @@ tasks:
     pytest:
         silent: false
         interactive: false
-        dotenv: [prod.env]
         cmds:
             - poetry run vulture --min-confidence 100 {{.BUILD_DIR}}
             - poetry run xenon --max-absolute B --max-modules B --max-average B {{.BUILD_DIR}}
@@ -62,13 +62,6 @@ tasks:
             - poetry run pyreverse {{.BUILD_DIR}} -d docs
             - poetry run mdformat docs
             - git add docs
-    docker-purge: docker system prune -a -f --volumes
-    start_webserver: poetry run python3 cam_privacy/webserver.py
-    start_docker_rootless:
-        env: # Due to running root-less on dev box
-            DOCKER_HOST: unix:///run/user/1000/docker.sock
-        cmds:
-            - docker-compose up
     docker_build_and_run:
         cmds:
             - docker-compose build
