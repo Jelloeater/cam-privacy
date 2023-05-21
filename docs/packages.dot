@@ -1,0 +1,8 @@
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"cam_privacy" [color="black", label=<cam_privacy>, shape="box", style="solid"];
+"cam_privacy.main" [color="black", label=<cam_privacy.main>, shape="box", style="solid"];
+"cam_privacy.webserver" [color="black", label=<cam_privacy.webserver>, shape="box", style="solid"];
+"cam_privacy.webserver" -> "cam_privacy.main" [arrowhead="open", arrowtail="none"];
+}

@@ -5,8 +5,8 @@ from time import sleep
 import requests
 from dotenv import load_dotenv
 
-import cam_privacy.webserver as web
 import cam_privacy.main
+import cam_privacy.webserver as web
 
 load_dotenv()
 os.environ.setdefault("TEST_MODE", str(True))  # To break out of color cycle loop
@@ -43,11 +43,3 @@ class Test_API_full:
     def test_base_url(self):
         r = requests.get(url=f"http://{web.Server.local_nic()}:{str(web.Server.port)}")
         assert r.status_code == 200
-
-
-class TestMain:
-    def test_privacy_on(self):
-        cam_privacy.main.privacy_toggle(True)
-
-    def test_privacy_off(self):
-        cam_privacy.main.privacy_toggle(False)

@@ -7,7 +7,7 @@ vars:
     FOLDER: cam_privacy
 tasks:
     default:
-        - task --list-all
+        - task test
 # Local Dev
     test:
         silent: false
