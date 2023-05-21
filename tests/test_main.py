@@ -20,14 +20,14 @@ class Test_Mock:
     c = TestClient(web.web_app().app)
 
     def test_on(self):
-        self.c.get("/on")
+        self.c.get(f"/{os.getenv('TEST_CAMERA')}/on")
 
     def test_off(self):
-        self.c.get("/off")
+        self.c.get(f"/{os.getenv('TEST_CAMERA')}/off")
 
 
 class Test_API_full:
-    """This run a full version of the webserver"""
+    """This runs a full version of the webserver"""
 
     background_server = Process(target=web.Server.start_server, daemon=True)
 
@@ -42,14 +42,6 @@ class Test_API_full:
 
     def test_base_url(self):
         r = requests.get(url=f"http://{web.Server.local_nic()}:{str(web.Server.port)}")
-        assert r.status_code == 200
-
-    def test_on(self):
-        r = requests.get(url=f"http://{web.Server.local_nic()}:{str(web.Server.port)}/on")
-        assert r.status_code == 200
-
-    def test_off(self):
-        r = requests.get(url=f"http://{web.Server.local_nic()}:{str(web.Server.port)}/off")
         assert r.status_code == 200
 
 
